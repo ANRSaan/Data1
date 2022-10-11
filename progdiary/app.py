@@ -1,7 +1,6 @@
 
 
-from database import add_entry, get_entries
-
+from database import add_entry, get_entries, create_table
 menu = """Please select one of the following options:
 1) Add new entry for today.
 2) View entries.
@@ -24,6 +23,7 @@ def view_entries(entries):
 
 
 print(welcome)
+create_table()
 
 while (user_input := input(menu)) != "3":
     if user_input == "1":
