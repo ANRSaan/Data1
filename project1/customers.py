@@ -1,4 +1,12 @@
-# create_customers =  ####################### TO DO ################################
+create_customers =  """
+    CREATE TABLE customers (
+        id SERIAL PRIMARY KEY,
+        first_name VARCHAR(20),
+        last_name VARCHAR(30),
+        email VARCHAR(50),
+        gender VARCHAR(1)
+        );
+"""
 
 # FOLLOW PROJECT INSTRUCTIONS TO CREATE TABLE FOR CUSTOMER DATA
 

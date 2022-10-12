@@ -1,4 +1,13 @@
-# create_invoices = ####################### TO DO ################################
+create_invoices = """
+    CREATE TABLE invoices (
+        id SERIAL PRIMARY KEY,
+        stock_code VARCHAR(10),
+        product_category VARCHAR(50),
+        unit_price DECIMAL(8, 2),
+        quantity INTEGER,
+        customer_id INTEGER
+    );
+"""
 
 # FOLLOW PROJECT INSTRUCTIONS TO CREATE TABLE FOR INVOICE DATA
 
