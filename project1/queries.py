@@ -1,6 +1,10 @@
 ############################# TO DO #####################################
 ##### write import statements #####
 
+import psycopg2
+from psycopg2 import Error
+from database import get_connected
+
 try:
     # connection to database
 
@@ -14,11 +18,35 @@ try:
 
     #### create master_query variable
 
+    master_query = """
+        SELECT * FROM customers AS c
+        JOIN invoices AS i
+        ON c.id = i.customer_id;
+    """
+
     #### create outdoors_query variable
+    outdoors_query = """
+        SELECT * FROM customers AS c
+        JOIN invoices AS i
+        ON c.id = i.customer_id
+        WHERE i.product_category = 'Outdoors';
+    """
 
     #### create garden_query variable
+    garden_query = """
+        SELECT * FROM customers AS c
+        JOIN invoices AS i
+        ON c.id = i.customer_id
+        WHERE i.product_category = 'Garden';
+    """
 
     #### create product_revenue variable
+    product_revenue = """
+        SELECT product_category, SUM(unit_price*quantity)
+        FROM invoices
+        GROUP BY product_category
+        ORDER BY SUM DESC;
+    """
 
 ############################# TO DO ####################################
     ############ COPYING SQL QUERY OUTPUTS TO CSV FILES #############
