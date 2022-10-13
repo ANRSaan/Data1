@@ -21,7 +21,7 @@ try:
     master_query = """
         SELECT * FROM customers AS c
         JOIN invoices AS i
-        ON c.id = i.customer_id;
+        ON c.id = i.customer_id
     """
 
     #### create outdoors_query variable
@@ -29,7 +29,7 @@ try:
         SELECT * FROM customers AS c
         JOIN invoices AS i
         ON c.id = i.customer_id
-        WHERE i.product_category = 'Outdoors';
+        WHERE i.product_category = 'Outdoors'
     """
 
     #### create garden_query variable
@@ -37,7 +37,7 @@ try:
         SELECT * FROM customers AS c
         JOIN invoices AS i
         ON c.id = i.customer_id
-        WHERE i.product_category = 'Garden';
+        WHERE i.product_category = 'Garden'
     """
 
     #### create product_revenue variable
@@ -45,30 +45,45 @@ try:
         SELECT product_category, SUM(unit_price*quantity)
         FROM invoices
         GROUP BY product_category
-        ORDER BY SUM DESC;
+        ORDER BY SUM DESC
     """
 
 ############################# TO DO ####################################
     ############ COPYING SQL QUERY OUTPUTS TO CSV FILES #############
 
     #### create master_output variable with formatted master_query
+    master_output = "COPY ({0}) TO STDOUT WITH CSV HEADER".format(master_query)
 
     #### create outdoors_output variable with formatted outdoors_query
+    outdoors_output = "COPY ({0}) TO STDOUT WITH CSV HEADER".format(outdoors_query)
 
     #### create garden_output variable with formatted garden_query
+    garden_output = "COPY ({0}) TO STDOUT WITH CSV HEADER".format(garden_query)
 
     #### create product_revenue_output variable with formatted product_revenue_query
+    product_revenue_output = "COPY ({0}) TO STDOUT WITH CSV HEADER".format(product_revenue)
 
 ############################# TO DO ####################################
 ############## CREATING CSV FILES FROM OUTPUTS #########################
 
     #### create master.csv with open(...) function ####
-
+    with open('master.csv', 'w') as f:
+        print('Writing master...')
+        cursor.copy_expert(master_output, f)
     #### create outdoors.csv with open(...) function ####
+    with open('outdoors.csv', 'w') as f:
+        print('Writing outdoors...')
+        cursor.copy_expert(outdoors_output, f)
 
     #### create garden.csv with open(...) function ####
+    with open('garden.csv', 'w') as f:
+        print('Writing garden...')
+        cursor.copy_expert(garden_output, f)
 
     #### create product_revenue.csv with open(...) function ####
+    with open('product_revenue.csv', 'w') as f:
+        print('Writing product revenue...')
+        cursor.copy_expert(product_revenue_output, f)
 
 except (Exception, Error) as error:
     print("Error while connecting to PostgreSQL DB", error)
