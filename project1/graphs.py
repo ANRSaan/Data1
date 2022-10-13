@@ -1,12 +1,16 @@
 ############################# TO DO #####################################
 
 # write import statement for psycopg2
+import psycopg2
 
 # write import statement to import Error from psycopg2
+from psycopg2 import Error
 
 # import the get_connected function from your database.py file
+from database import get_connected
 
 # import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 
 
 try:
