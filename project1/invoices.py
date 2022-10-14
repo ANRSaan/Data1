@@ -1,5 +1,5 @@
 create_invoices = """
-    CREATE TABLE invoices (
+    CREATE TABLE IF NOT EXISTS invoices (
         id SERIAL PRIMARY KEY,
         stock_code VARCHAR(10),
         product_category VARCHAR(50),
